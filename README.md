@@ -60,17 +60,15 @@ Our mission is to develop a platform cms specialized in forex trade, with modula
 
 * <p>Sign up with <a target="_blank" href="https://m.do.co/c/397fb2277475">Digital Ocean</a><img width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
 * Install LAMP to Linux or Wamp to Windows https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04
-* Edit the configuration file `sudo nano /base/init.php`
-* Edit the configuration file `sudo nano /vendor/sql/phpliteadmin.conf.php`
 * Access PhpMyAdmin
 
 ### Clone
 
-- Clone this repo to your local machine using `sudo git clone https://github.com/Jfaler/Bitcoin-Casino`
+- Clone this repo to your local machine using `sudo git clone https://github.com/crowdforex/crowdforex`
 
 ## Getting Involved
 
-Want to report a bug, request a feature, contribute or translate Bitcoin-Casino?
+Want to report a bug, request a feature, contribute or translate Crowd Forex?
 
 
 ### Step 1

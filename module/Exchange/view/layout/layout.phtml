@@ -1,0 +1,21 @@
+<?php 
+
+use Manager\Config\ManagerHydratorConfig;
+use Manager\Session\Session;
+
+$config  = new ManagerHydratorConfig();
+$session = new Session();
+
+//Define config file of system
+$config->getConfig(require __DIR__ . '/../../../../config/manager.config.php');
+
+//Define the user logged in system
+$user = $session->container()->user;
+
+//String objects of settings
+//$name    = $config->getName();
+$manager = $config->getManager();
+$theme   = $config->getTheme();
+
+//Returns the settings theme to content
+return require $theme;

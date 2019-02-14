@@ -1,0 +1,12 @@
+<?php
+$uri = explode('/', $_SERVER['REQUEST_URI']);
+if($uri[3] != 'static'){
+        require __DIR__ . '/header.phtml';
+}
+        echo $this->content;
+        if($uri[3] != 'static'){
+            
+        require __DIR__ . '/footer.phtml';
+        }
+
+        ?>

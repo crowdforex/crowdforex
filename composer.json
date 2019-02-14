@@ -1,0 +1,64 @@
+{
+	"description" : "Exchange bitcoin descentralized in PHP",
+	"type" : "project",
+	"license" : "GPL-3.0",
+	"keywords" : [
+		"cryptocurrencies",
+		"blockchain"
+	],
+	"minimum-stability" : "alpha",
+	"prefer-stable" : true,
+	"require" : {
+		"php" : "^5.6 || ^7.0",
+		"zendframework/zend-component-installer" : "^1.0 || ^0.7 || ^1.0.0-dev@dev",
+		"zendframework/zend-mvc" : "^3.0.1",
+		"zfcampus/zf-development-mode" : "^3.0",
+		"zendframework/zend-db" : "^2.9",
+		"zendframework/zend-form" : "^2.12",
+		"zendframework/zend-crypt" : "^3.3",
+		"zendframework/zend-authentication" : "^2.6",
+		"zendframework/zend-session" : "^2.8",
+		"zendframework/zend-validator" : "^2.10",
+		"guzzlehttp/guzzle" : "^6.2.2",
+		"zendframework/zend-i18n" : "^2.9",
+		"zendframework/zend-json" : "~3.1",
+		"php-ai/php-ml" : "^0.7.0",
+		"twbs/bootstrap" : "^4.2"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Manager\\Config\\" : "vendor/manager/manager-config/src",
+			"Manager\\File\\" : "vendor/manager/manager-file/src",
+			"Manager\\Session\\" : "vendor/manager/manager-session/src",
+			"Manager\\Db\\" : "vendor/manager/manager-db/src",
+			"Manager\\Router\\" : "vendor/manager/manager-router/src",
+			"Manager\\Modules\\" : "vendor/manager/manager-modules/src",
+			"Manager\\Theme\\" : "vendor/manager/manager-theme/src",
+			"Manager\\Components\\" : "vendor/manager/manager-components/src",
+			"Zend\\Cache\\" : "vendor/zendframework/zend-cache/src",
+			"Zend\\Log\\" : "vendor/zendframework/zend-log/src",
+			"Pleo\\" : "vendor/merkle-tree-master/src",
+			"Stephenhill\\" : "vendor/base58php-master/src",
+			"Crypt\\Algo\\" : "vendor/crypt-algo/src",
+			"Blockchain\\Api\\" : "vendor/blockchain/src",
+			"P2P\\Socket\\" : "vendor/websocket/p2p-socket",
+			"Crowdforex\\Api\\" : "vendor/crowdforex/crowdforex-api/src"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"ApplicationTest\\" : "module/Application/test/"
+		}
+	},
+	"scripts" : {
+		"cs-check" : "phpcs",
+		"cs-fix" : "phpcbf",
+		"development-disable" : "zf-development-mode disable",
+		"development-enable" : "zf-development-mode enable",
+		"development-status" : "zf-development-mode status",
+		"post-create-project-cmd" : "@development-enable",
+		"serve" : "php -S 0.0.0.0:8080 -t public public/index.php",
+		"test" : "phpunit"
+	},
+	"name" : "crowdforex/crowdforex"
+}

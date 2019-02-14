@@ -1,0 +1,27 @@
+<?php 
+
+use Manager\Config\ManagerHydratorConfig;
+use Manager\Session\Session;
+use Components\Model\ThemeDAO;
+use Components\Model\ComponentDAO;
+
+$config  = new ManagerHydratorConfig();
+$session = new Session();
+$component = new ComponentDAO();
+//echo $theme->show();
+//Define config file of system
+$config->getConfig([
+    'name'  => 'Cms',
+    'theme' => __DIR__ . '/../../../../public/theme/'.$component->theme().'/layout/layout.phtml'
+]);
+
+//Define the user logged in system
+$user = $session->container()->user;
+
+//String objects of settings
+//$name    = $config->getName();
+$manager = $config->getManager();
+$theme   = $config->getTheme();
+
+//Returns the settings theme to content
+return require $theme;

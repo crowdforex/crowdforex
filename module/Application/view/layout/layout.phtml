@@ -1,0 +1,142 @@
+<?php
+$uri = explode('/', $_SERVER['REQUEST_URI']);
+if($uri[3] != 'static'){
+?>
+<?php echo $this->doctype() ?>
+
+<html lang="en">
+    <head>
+    <title>Crowd Forex</title>
+    <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+         <!-- Le styles -->
+        <?php echo $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('../vendor/twbs/bootstrap/dist/css/bootstrap.min.css'))
+            ->prependStylesheet($this->basePath('theme/Bootstrap/dashboard.css'))
+            ->prependStylesheet($this->basePath('theme/Bootstrap/signin.css'))
+            ->prependStylesheet($this->basePath('theme/Gentelella/vendors/font-awesome/css/font-awesome.min.css'))
+            ->prependStylesheet($this->basePath('theme/Gentelella/vendors/nprogress/nprogress.css'))
+            ->prependStylesheet($this->basePath('theme/Gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'))
+            ->prependStylesheet($this->basePath('theme/Gentelella/vendors/vendors/bootstrap-daterangepicker/daterangepicker.css'))
+            ->prependStylesheet($this->basePath('theme/Gentelella/build/css/custom.min.css'))
+            ->prependStylesheet($this->basePath('theme/Bootstrap/grid.css'))
+            
+        ?>
+  </head>
+<body>
+   <?php if($uri[3] != 'account'){?> <nav class="navbar navbar-expand-xl fixed-top navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Crowd Forex</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+   
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="home"></span>
+                  Home <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  My Wallet
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Settings
+                </a>
+              </li>
+              
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Chat
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav><?php }?>
+        
+            <?php } echo $this->content; if($uri[3] != 'static'){?>
+            <!-- footer content -->
+
+    
+
+   
+    <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('theme/Gentelella/build/js/custom.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/moment/min/moment.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/DateJS/build/date.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/flot.curvedlines/curvedLines.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/flot.orderbars/js/jquery.flot.orderBars.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Flot/jquery.flot.resize.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Flot/jquery.flot.stack.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Flot/jquery.flot.time.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Flot/jquery.flot.pie.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Flot/jquery.flot.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/skycons/skycons.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/gauge.js/dist/gauge.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/morris.js/morris.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/raphael/raphael.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/jquery-sparkline/dist/jquery.sparkline.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/Chart.js/dist/Chart.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/nprogress/nprogress.js'))
+            ->prependFile($this->basePath('../vendor/twbs/bootstrap/dist/js/vendor/popper.min.js'))
+            ->prependFile($this->basePath('../vendor/twbs/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('theme/Gentelella/vendors/jquery/dist/jquery.min.js'))
+       ?>
+
+
+
+  </body>
+</html>
+<?php  }?>

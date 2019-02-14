@@ -114,12 +114,12 @@ class Users extends ParentDao
             );
         
         
-        $authAdapter
+        $this->authAdapter
         ->setTableName('users')
         ->setIdentityColumn('user')
         ->setCredentialColumn('password');
         
-        $authAdapter
+        $this->authAdapter
         ->setIdentity($this->mapper->getUser())
         ->setCredential($this->mapper->getPassword());
         
@@ -142,8 +142,8 @@ class Users extends ParentDao
                     return $this->mapper->setMessage('Invalid Password');
                     
             }else{
-                $this->session->container()->user = $authAdapter->getIdentity();
-                return $authAdapter->authenticate();
+                $this->session->container()->user = $this->authAdapter->getIdentity();
+                return $this->authAdapter->authenticate();
             }
         }
         
@@ -158,6 +158,24 @@ class Users extends ParentDao
         
         // Remove identity from session.
         $this->auth->clearIdentity();
+    }
+    
+    public function redirectToAuthUrl($request, $url)
+    {
+        // Allow to log out only when user is logged in.
+        if ($this->session->container()->user==null) {
+            return $request->redirect()->toUrl($url);
+        }
+        
+    }
+    
+    public function redirectToUrl($request, $url)
+    {
+        // Allow to log out only when user is logged in.
+        if ($this->session->container()->user!=null) {
+            return $request->redirect()->toUrl($url);
+        }
+        
     }
 }
 

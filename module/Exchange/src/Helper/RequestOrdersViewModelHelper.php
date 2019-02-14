@@ -34,7 +34,6 @@ class RequestOrdersViewModelHelper
             ){
             
             return array(
-                //'user' => 'tiagocamini',
                 'amount_coin' => $_POST['amount_coin'],
                 'price_coin' => $_POST['price_coin'],
                 'amount' => $_POST['amount'],

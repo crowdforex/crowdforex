@@ -37,6 +37,7 @@ class IndexController extends AbstractActionController
      */
     public function signinAction()
     {
+        $this->auth->users->redirectToUrl($this, '/crowdforex/public/exchange');
         $this->auth->signin();
         return new ViewModel(array(
             'form' => $this->auth->authError()

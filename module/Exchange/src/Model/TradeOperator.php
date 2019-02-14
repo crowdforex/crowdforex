@@ -40,8 +40,6 @@ class TradeOperator
                 $balance = $amount;
             }
             $this->wallet->mapper->setCoin($coin);
-            echo var_dump($this->wallet->myBalance());
-            echo var_dump($balance);
             
             if($this->wallet->myBalance() >= $balance){
                 if($this->orders->session->container()->user != $this->orders->getOrder('user')){

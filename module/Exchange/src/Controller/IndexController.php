@@ -6,6 +6,7 @@ use Zend\View\Model\ViewModel;
 use Exchange\Model\Orders;
 use Exchange\Helper\RequestOrdersViewModelHelper;
 use Wallet\Model\Wallet;
+use Auth\Model\Users;
 
 
 /**
@@ -21,6 +22,8 @@ class IndexController extends AbstractActionController
     public function __construct()
     {
         $this->exchange = new RequestOrdersViewModelHelper();
+        $this->users = new Users();
+        //$this->redirect()->;
     }
     
     /**
@@ -30,6 +33,7 @@ class IndexController extends AbstractActionController
      */
     public function indexAction()
     {
+        $this->users->redirectToAuthUrl($this, 'account/auth/signin');
         $this->exchange->operate();
         
         return new ViewModel(array(

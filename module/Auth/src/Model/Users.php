@@ -3,18 +3,9 @@ namespace Auth\Model;
 
 use Application\DbConnection\ParentDao;
 use Auth\Model\Mapper\AuthMapper;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Result;
-use Zend\Crypt\Password\Bcrypt;
-use Zend\Db\Adapter\Adapter;
-use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
-use Zend\Session\Container;
-use Zend\Session\SessionManager;
-use Zend\Session\Config\StandardConfig;
-use Zend\Session\Storage\SessionStorage;
-use Manager\Session\Session;
 use Manager\Db\DbManager;
-use Zend\Authentication\Adapter\DbTable;
+use Manager\Session\Session;
+use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
 
 /**
  *
@@ -54,7 +45,7 @@ class Users extends ParentDao
     
     /**
      * 
-     * @return unknown
+     * @return mixed
      */
     public function signup($data)
     {

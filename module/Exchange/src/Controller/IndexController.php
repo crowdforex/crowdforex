@@ -62,5 +62,16 @@ class IndexController extends AbstractActionController
         ));
     }
     
+    /**
+     *
+     */
+    public function walletAction()
+    {
+        $this->exchange->approveUserOrder();
+        return new ViewModel(array(
+            'orders' => $this->exchange->getAllOrders()
+        ));
+    }
+    
 }
 

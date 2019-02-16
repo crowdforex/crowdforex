@@ -57,6 +57,22 @@ class Orders extends ParentDao
     }
     
     /**
+     *
+     * @param string $field
+     */
+    public function getOrderByDeposit($field)
+    {
+        $order = $this->get($field, array(
+            'id' => $this->mapper->getId(),
+            'user' => $this->session->container()->user,
+            'status' => 'open',
+            'partial' => 'y'
+        ));
+        
+        return $order;
+    }
+    
+    /**
      * 
      * @param array string $where
      * @return mixed
@@ -116,7 +132,7 @@ class Orders extends ParentDao
     {
         echo var_dump($this->getOrder('amount'));
         if($this->getOrder('id') != null OR
-           $this->getOrder('amount_coin') == $this->mapper->getPriceCoin() OR
+           $this->getOrder('amount_coin') != $this->mapper->getPriceCoin() OR
            $this->mapper->getType() != $this->getOrder('type') &&
            $this->mapper->getStatus() == $this->getOrder('status') ){
                if($this->mapper->getAmount() < $this->getOrder('amount') &&
@@ -168,6 +184,8 @@ class Orders extends ParentDao
                
                
                
+               
+               
         }
         else{
             $this->orders->data->insert(array(
@@ -184,5 +202,63 @@ class Orders extends ParentDao
         }
     }
     
+    public function insertOrder()
+    {
+        if($this->getOrder('user') != $this->session->container()->user){
+            return $this->orders->data->insert(array(
+                'user' => $this->session->container()->user,
+                'amount_coin' => $this->mapper->getAmountCoin(),
+                'price_coin' => $this->mapper->getPriceCoin(),
+                'amount' => $this->mapper->getAmount(),
+                'price' => $this->mapper->getPrice(),
+                'type' => $this->mapper->getType(),
+                'status' => $this->mapper->getStatus(),
+                'date_open_order' => date('Y-m-d H:i:s'),
+                'date_closed_order' => $this->mapper->getDateClosedOrder()
+            ));
+        }
+    }
+    
+    public function approveTrade($data)
+    {
+        //$this->mapper->getData($data);
+        
+        $status = 'closed';
+        $date = date('Y-m-d H:i:s');
+        $amount = 0;
+        echo var_dump($this->getOrderByDeposit('id'));
+        $this->orders->data->update(array(
+            //'order_user' => $this->session->container()->user,
+            'status' => $status,
+            'date_closed_order' => $date,
+            //'partial' => 'y'
+            //'amount' => number_format($amount, '8', '.', '')
+        ), array(
+            'id' => $this->mapper->getId(),
+            'user' => $this->session->container()->user,
+            'partial' => 'y'
+        ));
+    }
+    
+    /**
+     * 
+     */
+    public function partialExecution()
+    {
+        if($this->getOrder('amount') == $this->mapper->getAmount() && $this->mapper->getStatus() == $this->getOrder('status') && $this->getOrder('partial') == 'n' && $this->mapper->getAmountCoin() == $this->mapper->getPriceCoin()){
+            $status = 'open';
+            $date = date('Y-m-d H:i:s');
+            $amount = 0;
+            $this->orders->data->update(array(
+                'order_user' => $this->session->container()->user,
+                'status' => $status,
+                'date_closed_order' => $date,
+                'partial' => 'y'
+                //'amount' => number_format($amount, '8', '.', '')
+            ), array(
+                'id' => $this->getOrder('id')
+            ));
+        }
+    }
 }
 

@@ -107,14 +107,58 @@ class TradeOperator
     
     /**
      * 
+     * @param string $priceCoin
+     * @param string $amountCoin
      * @return mixed
      */
     public function getAllOrders($priceCoin, $amountCoin)
     {
-        return $this->orders->search(array(
-            'price_coin' => $priceCoin,
-            'amount_coin' => $amountCoin
+        if($priceCoin != $amountCoin)
+            return $this->orders->search(array(
+                'price_coin' => $priceCoin,
+                'amount_coin' => $amountCoin
+            ));
+        else
+            return $this->orders->search(array(
+                'price_coin' => $priceCoin,
+                'amount_coin' => $amountCoin,
+                'status' => 'open',
+                'partial' => 'y'
+            ));
+    }
+    
+    public function closeTrade($data)
+    { 
+        $this->orders->mapper->getData($data);
+        $this->wallet->credit(array(
+            'user' => $this->orders->getOrderByDeposit('order_user'),
+            'coin' => $this->orders->getOrderByDeposit('amount_coin'),
+            'balance' => $this->orders->getOrderByDeposit('amount')
         ));
+        $this->orders->approveTrade($data);
+        
+        
+    }
+    
+    public function deposit($order)
+    {
+        $this->orders->mapper->getData($order);
+        
+        if($this->orders->getOrder('user') != null){
+            $this->orders->partialExecution();
+            
+            return $this->wallet->search(array(
+                'user' => $this->orders->getOrder('user'),
+                'coin' => $this->orders->getOrder('price_coin')
+            ));
+        }
+        else{
+             $this->orders->insertOrder();
+             return $this->wallet->search(array(
+                 'user' => $this->orders->getOrder('user'),
+                 'coin' => $this->orders->getOrder('price_coin')
+             ));
+        }
     }
 }
 

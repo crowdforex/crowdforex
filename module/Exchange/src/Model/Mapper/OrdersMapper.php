@@ -9,6 +9,8 @@ namespace Exchange\Model\Mapper;
 class OrdersMapper
 {
     
+    public $id;
+    
     public $user;
     
     public $orderUser;
@@ -40,6 +42,9 @@ class OrdersMapper
         if(is_array($data)){
             foreach($data as $key => $value){
                 switch($key){
+                    case 'id':
+                        $this->setId($value);
+                        break;
                     case 'user':
                         $this->setUser($value);
                         break;
@@ -73,6 +78,26 @@ class OrdersMapper
                 }
             }
         }
+    }
+    
+    /**
+     * @param $id
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    
+    
+    /**
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
     
     /**

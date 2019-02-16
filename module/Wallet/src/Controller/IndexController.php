@@ -29,7 +29,8 @@ class IndexController extends AbstractActionController
     {
         $wallet = new RequestWalletViewlModelHelper();
         return new ViewModel(array(
-            'balances' => $wallet->getWalletBalance()
+            'balances' => $wallet->getWalletBalance(),
+            'userToDeposit' => $wallet->getUserToDeposit()
         ));
     }
     

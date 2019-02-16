@@ -59,7 +59,7 @@ class RequestOrdersViewModelHelper
             isset($_POST['status'])
             ){
             
-            $this->operator->create($this->getOrder());
+                $this->operator->create($this->getOrder());
         }
     }
     
@@ -88,6 +88,19 @@ class RequestOrdersViewModelHelper
            isset($_GET['amount_coin'])
             ){
                 return $this->operator->getAllOrders($_GET['price_coin'], $_GET['amount_coin']);
+        }
+    }
+    
+    public function approveUserOrder()
+    {
+        //$id = null;
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+                
+        
+        return $this->operator->closeTrade(array(
+                    'id' => $id
+                ));
         }
     }
     

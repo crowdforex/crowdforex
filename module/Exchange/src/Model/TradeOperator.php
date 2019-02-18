@@ -46,6 +46,7 @@ class TradeOperator
                     if($this->orders->getOrder('amount') == $order['amount'] OR
                         $this->orders->getOrder('status') == $order['status']
                         ){
+                        
                             //$this->orders->create($order);
                             $this->wallet->debit(array(
                                 //'user' => $this->wallet->session->container()->user,
@@ -57,7 +58,22 @@ class TradeOperator
                                 'coin' => $coin,
                                 'balance' => $value
                             ));
-                            
+                            if($this->orders->getOrder('user') != null){
+                                if($this->orders->mapper->getType() == 'sell'){
+                                        $this->wallet->credit(array(
+                                        'user' => $this->orders->session->container()->user,
+                                        'coin' => $order['price_coin'],
+                                        'balance' => number_format($amount, '8', '.', '') * number_format($price, '8', '.', '')
+                                    ));
+                                }
+                                if($this->orders->mapper->getType() == 'buy'){
+                                    $this->wallet->credit(array(
+                                        'user' => $this->orders->session->container()->user,
+                                        'coin' => $order['amount_coin'],
+                                        'balance' => number_format($amount, '8', '.', '')
+                                    ));
+                                }
+                            }
                             $this->orders->create($order);
                     }else{
                         

@@ -38,7 +38,8 @@ class IndexController extends AbstractActionController
         
         return new ViewModel(array(
             'orders' => $this->exchange->getAllOrders(),
-            'graphic' => $this->exchange->getGraphic()
+            'graphic' => $this->exchange->getGraphic(),
+            //'userToDeposit' => $this->exchange->getUserToDeposit()
         ));
     }
     

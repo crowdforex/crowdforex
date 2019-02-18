@@ -58,8 +58,11 @@ class RequestOrdersViewModelHelper
             isset($_POST['type']) &&
             isset($_POST['status'])
             ){
-            
-                $this->operator->create($this->getOrder());
+                if($_GET['price_coin'] != $_GET['amount_coin']){
+                    
+                    $this->operator->create($this->getOrder());
+                
+                }
         }
     }
     
@@ -111,6 +114,36 @@ class RequestOrdersViewModelHelper
             'http://localhost'
         ));
         return $client->getGraphic();
+    }
+    
+    public function getUserToDeposit()
+    {
+        if(isset($_POST['price'])){
+            // $this->exchange->operate();
+            if($_GET['price_coin'] == $_GET['amount_coin']){
+                if($this->operator->orders->getOrder('user') != null){
+                    
+                    $select = $this->operator->create($this->getOrder());
+                    
+                    foreach($select as $key){
+                        $msg = "Deposit the value to: " . $key['user'] . "" . PHP_EOL;
+                        //$msg .= "Deposit the value to: " . $key['user'] . "" . PHP_EOL;
+                        $msg .= "<p>".$this->operator->orders->getOrder('price_coin').": " . $key['account'] . "</p>" . PHP_EOL;
+                        
+                        return $msg;
+                    }
+                }
+                else{
+                    $select = $this->operator->create($this->getOrder());
+                    
+                    $msg = "On moment exist'nt seller to this balance, but you be positioned on next sell, be patient ";
+                    //$msg .= "Deposit the value to: " . $key['user'] . "" . PHP_EOL;
+                    //$msg .= "<p>".$this->operator->orders->getOrder('price_coin').": " . $key['account'] . "</p>" . PHP_EOL;
+                    
+                    return $msg;
+                }
+            }
+        }
     }
 }
 

@@ -29,12 +29,12 @@ class Orders extends ParentDao
     {
         $this->mapper->getData($data);
         
-        if($this->session->container()->user != $this->getOrder('user') //&&
+        //if($this->session->container()->user != $this->getOrder('user') //&&
             // &&
             //$this->mapper->getOrderUser() !=
-            ){
+        //    ){
                 $this->execute();
-        }
+        //}
     }
     
     /**
@@ -51,22 +51,6 @@ class Orders extends ParentDao
             'price' => $this->mapper->getPrice(),
             //'type' => $this->mapper->getType(),
             'status' => $this->mapper->getStatus(),
-        ));
-        
-        return $order;
-    }
-    
-    /**
-     *
-     * @param string $field
-     */
-    public function getOrderByDeposit($field)
-    {
-        $order = $this->get($field, array(
-            'id' => $this->mapper->getId(),
-            'user' => $this->session->container()->user,
-            'status' => 'open',
-            'partial' => 'y'
         ));
         
         return $order;
@@ -131,10 +115,11 @@ class Orders extends ParentDao
     public function execute()
     {
         echo var_dump($this->getOrder('amount'));
-        if($this->getOrder('id') != null OR
-           $this->getOrder('amount_coin') != $this->mapper->getPriceCoin() OR
+        if($this->getOrder('id') != null &&
+           $this->getOrder('amount_coin') != $this->mapper->getPriceCoin() &&
            $this->mapper->getType() != $this->getOrder('type') &&
-           $this->mapper->getStatus() == $this->getOrder('status') ){
+           $this->mapper->getStatus() == $this->getOrder('status') &&
+           $this->session->container()->user != $this->getOrder('user')){
                if($this->mapper->getAmount() < $this->getOrder('amount') &&
                   $this->getOrder('partial') == 'n'){
                    $status = 'open';
@@ -241,7 +226,7 @@ class Orders extends ParentDao
     }
     
     /**
-     * 
+     *
      */
     public function partialExecution()
     {
